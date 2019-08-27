@@ -18,7 +18,8 @@ const forecast = (latitude, longitude, callback) => {
             callback(data.error, undefined);
         } else {
             callback(undefined, { 
-                summary: data.daily.data[0].summary, 
+                summary: data.daily.data[0].summary,
+                extendedForecast: data.daily.summary, 
                 currentTemperature: data.currently.temperature,
                 feelsLike: data.currently.apparentTemperature,
                 precipProbability: data.currently.precipProbability 

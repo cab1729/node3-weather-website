@@ -5,6 +5,7 @@ const p2 = document.querySelector('#p2');
 const p3 = document.querySelector('#p3');
 const p4 = document.querySelector('#p4');
 const p5 = document.querySelector('#p5');
+const p6 = document.querySelector("#p6");
 
 
 weatherForm.addEventListener('submit', (e) => {
@@ -14,6 +15,7 @@ weatherForm.addEventListener('submit', (e) => {
     p3.textContent = '';
     p4.textContent = '';
     p5.textContent = '';
+    p6.textContent = '';
     fetch('/weather?address=' + searchInput.value)
         .then((response) => {
             response.json().then((data) => {
@@ -25,6 +27,7 @@ weatherForm.addEventListener('submit', (e) => {
                     p3.textContent = 'Temperature: ' + data.temperature
                     p4.textContent = 'Feels like: ' + data.feelsLike
                     p5.textContent = 'Chance of rain: ' + (data.chanceRain*100) + '%'
+                    p6.textContent = 'Extended forecast: ' + data.extendedForecast
                 }
             })
         })
