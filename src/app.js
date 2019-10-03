@@ -46,9 +46,28 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
 
-    if (!req.query.address) {
+    if (!req.query.address && !req.query.latitude && !req.query.longitude) {
         return res.status(400).send({
             error: 'You must provide an address value'
+        })
+    }
+
+    if (req.query.latitude && req.query.longitude) {
+        return forecast(req.query.latitude, req.query.longitude, (error, { summary, extendedForecast, currentTemperature: temp, feelsLike, precipProbability: chanceRain } = {}) => {
+            if (error) {
+                return res.send({
+                    error
+                })
+            }
+
+            return res.send({
+                location: 'Current',
+                summary,
+                extendedForecast,
+                temperature: temp,
+                feelsLike,
+                chanceRain
+            })
         })
     }
 
